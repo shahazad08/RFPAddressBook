@@ -12,7 +12,8 @@ public class AddressBookMain {
             System.out.println("1. Create Contact");
             System.out.println("2. Display Contacts");
             System.out.println("3. Edit Contact");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete Contact");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -28,6 +29,9 @@ public class AddressBookMain {
                     addressBook.editContact();
                     break;
                 case 4:
+                    addressBook.deleteContact();
+                    break;
+                case 5:
                     System.out.println("Exiting the program. Goodbye!");
                     sc.close(); // Close the scanner before exiting
                     System.exit(0);

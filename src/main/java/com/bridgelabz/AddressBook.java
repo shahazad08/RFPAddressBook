@@ -136,5 +136,20 @@ public class AddressBook {
         for(Contact contact:contacts)
             System.out.println(contact);
     }
+
+    public void deleteContact() {
+        System.out.println("Enter the name you want to delete");
+        String firstName;
+        firstName=sc.next();
+        if(firstName.equals(contact.getFirstName())) {
+            contacts.remove(contact);
+            System.out.println("Contect remove Successfully");
+        }
+
+        else {
+            System.out.println("Contact Not present");
+        }
+
+    }
 }
 
