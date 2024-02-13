@@ -1,37 +1,46 @@
 package com.bridgelabz;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBookMain {
+     static Map<String, AddressBook> addressBooks = new HashMap<>();
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         System.out.println("Welcome to address Book");
-        Scanner sc=new Scanner(System.in);
-        AddressBook addressBook=new AddressBook();
+
+        AddressBook addressBook = new AddressBook();
         while (true) {
             System.out.println("Address Book Menu:");
-            System.out.println("1. Create Contact");
-            System.out.println("2. Display Contacts");
-            System.out.println("3. Edit Contact");
-            System.out.println("4. Delete Contact");
-            System.out.println("5. Exit");
+            System.out.println("1. Create Address Book");
+            System.out.println("2. Create Contact");
+            System.out.println("3. Display Contacts");
+            System.out.println("4. Edit Contact");
+            System.out.println("5. Delete Contact");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
 
             switch (choice) {
                 case 1:
-                    addressBook.createContact();
+                    createAddressBook();
                     break;
                 case 2:
-                    addressBook.displayContact();
+                    addressBook.createContact();
                     break;
                 case 3:
-                    addressBook.editContact();
+                    addressBook.displayContact();
                     break;
                 case 4:
-                    addressBook.deleteContact();
+                    addressBook.editContact();
                     break;
                 case 5:
+             //       addressBook.deleteContact();
+                    break;
+                case 6:
                     System.out.println("Exiting the program. Goodbye!");
                     sc.close(); // Close the scanner before exiting
                     System.exit(0);
@@ -41,4 +50,14 @@ public class AddressBookMain {
         }
     }
 
+    private static void createAddressBook() {
+        System.out.println("Enter the name of the new Address Book:");
+        String addressBookName = sc.next();
+        AddressBook newAddressBook = new AddressBook(addressBookName);
+        addressBooks.put(addressBookName, newAddressBook);
+        System.out.println("Address Book '" + addressBookName + "' created successfully.");
     }
+
+
+
+}
