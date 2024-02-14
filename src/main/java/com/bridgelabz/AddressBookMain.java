@@ -21,7 +21,8 @@ public class AddressBookMain {
             System.out.println("2. Add Contact");
             System.out.println("3. Display Contacts");
             System.out.println("4. Edit Contacts");
-            System.out.println("5. Exit");
+            System.out.println("5. Delete Contacts");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -41,6 +42,9 @@ public class AddressBookMain {
                     editContacts();
                     break;
                 case 5:
+                    deleteContact();
+                    break;
+                case 6:
                     System.out.println("Exiting the program. Goodbye!");
                     sc.close();
                     exit(0);
@@ -49,6 +53,36 @@ public class AddressBookMain {
             }
         }
     }
+
+    private static void deleteContact() {
+        System.out.println("Enter the name of the Address Book:");
+        String addressBookName = sc.nextLine();
+
+        if (addressBooks.containsKey(addressBookName)) {
+            AddressBook addressBook = addressBooks.get(addressBookName);
+
+            System.out.println("Enter the first name of the contact you want to delete:");
+            String targetFirstName = sc.nextLine();
+
+            Iterator<Contact> iterator = addressBook.contacts.iterator();
+
+            while (iterator.hasNext()) {
+                Contact contact = iterator.next();
+
+                if (contact.getFirstName().equalsIgnoreCase(targetFirstName)) {
+                    iterator.remove(); // Remove the matching contact
+                    System.out.println("Contact deleted successfully.");
+                    return;
+                }
+            }
+
+            System.out.println("Contact with name " + targetFirstName + " not found.");
+        } else {
+            System.out.println("Address Book '" + addressBookName + "' does not exist.");
+        }
+    }
+
+
 
     private static void editContacts() {
         System.out.println("Enter the name of the Address Book:");
