@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AddressBookMain {
     private static Map<String, AddressBook> addressBooks = new HashMap<>();
-  //  static AddressBook addressBook = new AddressBook();
+    static AddressBook addressBook = new AddressBook();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -34,9 +34,9 @@ public class AddressBookMain {
                 case 3:
                     displayContacts();
                     break;
-//                case 4:
-//                    editContacts();
-//                    break;
+                case 5:
+                    editContacts();
+                    break;
                 case 4:
                     System.out.println("Exiting the program. Goodbye!");
                     sc.close();
@@ -47,9 +47,9 @@ public class AddressBookMain {
         }
     }
 
-//    private static void editContacts() {
-//        addressBook.editContact();
-//    }
+    private static void editContacts() {
+        addressBook.editContact();
+    }
 
 
     private static void createAddressBook() {
