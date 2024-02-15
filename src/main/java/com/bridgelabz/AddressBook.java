@@ -1,8 +1,6 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 
 import static com.bridgelabz.AddressBookMain.sc;
@@ -12,6 +10,7 @@ import static java.lang.System.exit;
 class AddressBook implements AddressBookOperations {
     private String name;
     public ArrayList<Contact> contacts;
+    private static Set<String> uniqueFirstNames  = new HashSet<>();
 
     public AddressBook(String name) {
         this.name = name;
@@ -21,9 +20,15 @@ class AddressBook implements AddressBookOperations {
     public AddressBook() {
     }
 
-    public void addContact(Contact contact) {
-        contacts.add(contact);
-        System.out.println("Contact added to Address Book '" + name + "'");
+    public void addContact(Contact contact, Set<String> uniqueNames) {
+        String firstName = contact.getFirstName().toLowerCase();
+        if (uniqueFirstNames.contains(firstName.toLowerCase())) {
+            System.out.println("Duplicate entry for " + firstName + ". Contact not added.");
+        } else {
+            contacts.add(contact);
+            uniqueFirstNames.add(firstName.toLowerCase());
+            System.out.println("Contact added to Address Book '" + name + "'");
+        }
     }
 
     public void displayContacts() {

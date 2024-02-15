@@ -1,14 +1,13 @@
 package com.bridgelabz;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.System.exit;
 
 public class AddressBookMain {
     private static Map<String, AddressBook> addressBooks = new HashMap<>();
+    private static Set<String> uniqueNames = new HashSet<>();
+
    // static AddressBook addressBook = new AddressBook();
     static Scanner sc = new Scanner(System.in);
 
@@ -135,7 +134,7 @@ public class AddressBookMain {
 
             // Set contact details using user input...
 
-            addressBook.addContact(newContact);
+            addressBook.addContact(newContact, uniqueNames);
         } else {
             System.out.println("Address Book '" + addressBookName + "' does not exist.");
         }
