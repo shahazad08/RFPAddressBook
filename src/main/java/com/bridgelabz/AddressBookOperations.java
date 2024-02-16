@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.util.List;
 import java.util.Set;
 
 public interface AddressBookOperations {
@@ -7,4 +8,5 @@ public interface AddressBookOperations {
     void displayContacts();
     void editContact();
     void deleteContact();
+    List<Contact> searchPersonByCityOrState(String cityOrState);
 }

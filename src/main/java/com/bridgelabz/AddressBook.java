@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 import static com.bridgelabz.AddressBookMain.sc;
@@ -12,9 +13,29 @@ class AddressBook implements AddressBookOperations {
     public ArrayList<Contact> contacts;
     private static Set<String> uniqueFirstNames  = new HashSet<>();
 
+    // Maps to maintain City-Person and State-Person relationships
+    private Map<String, List<Contact>> cityPersonMap = new HashMap<>();
+    private Map<String, List<Contact>> statePersonMap = new HashMap<>();
+
     public AddressBook(String name) {
         this.name = name;
         this.contacts = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(ArrayList<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public AddressBook() {
@@ -26,6 +47,8 @@ class AddressBook implements AddressBookOperations {
             System.out.println("Duplicate entry for " + firstName + ". Contact not added.");
         } else {
             contacts.add(contact);
+            cityPersonMap.computeIfAbsent(contact.getCity().toLowerCase(), k -> new ArrayList<>()).add(contact);
+            statePersonMap.computeIfAbsent(contact.getState().toLowerCase(), k -> new ArrayList<>()).add(contact);
             uniqueFirstNames.add(firstName.toLowerCase());
             System.out.println("Contact added to Address Book '" + name + "'");
         }
@@ -148,7 +171,25 @@ class AddressBook implements AddressBookOperations {
     }
 
 
+
+
+    public List<Contact> searchPersonByCityOrState(String cityOrState) {
+        return contacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(cityOrState)
+                        || contact.getState().equalsIgnoreCase(cityOrState))
+                .collect(Collectors.toList());
+    }
+
+    public List<Contact> getContactsByState(String state) {
+        return statePersonMap.getOrDefault(state.toLowerCase(), Collections.emptyList());
+
+    }
+
+    public List<Contact> getContactsByCity(String city) {
+        return cityPersonMap.getOrDefault(city.toLowerCase(), Collections.emptyList());
+    }
 }
+
 
 
 

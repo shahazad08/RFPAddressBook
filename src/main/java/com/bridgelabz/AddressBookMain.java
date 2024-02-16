@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
 
@@ -21,7 +22,10 @@ public class AddressBookMain {
             System.out.println("3. Display Contacts");
             System.out.println("4. Edit Contacts");
             System.out.println("5. Delete Contacts");
-            System.out.println("6. Exit");
+            System.out.println("6. Search Person in City or State");
+            System.out.println("7. View Persons By City");
+            System.out.println("8. View Persons By State");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -44,6 +48,15 @@ public class AddressBookMain {
                     deleteContact();
                     break;
                 case 6:
+                    searchPersonByCityOrState();
+                    break;
+                case 7:
+                    viewPersonsByCity();
+                    break;
+                case 8:
+                    viewPersonsByState();
+                    break;
+                case 9:
                     System.out.println("Exiting the program. Goodbye!");
                     sc.close();
                     exit(0);
@@ -52,6 +65,65 @@ public class AddressBookMain {
             }
         }
     }
+
+    private static void viewPersonsByState() {
+        System.out.println("Enter the state to view persons:");
+        String state = sc.nextLine().toLowerCase();
+
+        for (AddressBook addressBook : addressBooks.values()) {
+            List<Contact> personsInState = addressBook.getContactsByState(state);
+
+            if (personsInState.isEmpty()) {
+                System.out.println("No persons found in the specified state for Address Book '"
+                        + addressBook.getName() + "'.");
+            } else {
+                System.out.println("Persons in State '" + state + "' in Address Book '" + addressBook.getName() + "':");
+                for (Contact person : personsInState) {
+                    System.out.println(person);
+                }
+            }
+        }
+
+    }
+
+    private static void viewPersonsByCity() {
+        System.out.println("Enter the city to view persons:");
+        String city = sc.nextLine().toLowerCase();
+        for (AddressBook addressBook : addressBooks.values()) {
+            List<Contact> personsInCity = addressBook.getContactsByCity(city);
+
+            if (personsInCity.isEmpty()) {
+                System.out.println("No persons found in the specified city for Address Book '"
+                        + addressBook.getName() + "'.");
+            } else {
+                System.out.println("Persons in City '" + city + "' in Address Book '" + addressBook.getName() + "':");
+                for (Contact person : personsInCity) {
+                    System.out.println(person);
+                }
+            }
+        }
+    }
+
+    private static void searchPersonByCityOrState() {
+
+        System.out.println("Enter the city or state to search:");
+        String cityOrState = sc.nextLine().toLowerCase();
+
+        for (AddressBook addressBook : addressBooks.values()) {
+            List<Contact> searchResults = addressBook.searchPersonByCityOrState(cityOrState);
+
+            if (searchResults.isEmpty()) {
+                System.out.println("No matching contacts found in the specified city or state for Address Book '"
+                        + addressBook.getName() + "'.");
+            } else {
+                System.out.println("Search Results in Address Book '" + addressBook.getName() + "':");
+                for (Contact contact : searchResults) {
+                    System.out.println(contact);
+                }
+            }
+        }
+    }
+
 
     private static void deleteContact() {
         System.out.println("Enter the name of the Address Book:");
