@@ -188,6 +188,19 @@ class AddressBook implements AddressBookOperations {
     public List<Contact> getContactsByCity(String city) {
         return cityPersonMap.getOrDefault(city.toLowerCase(), Collections.emptyList());
     }
+
+    public long countPersonsByState(String state) {
+        return contacts.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .count();
+
+    }
+
+    public long countPersonsByCity(String city) {
+        return contacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .count();
+    }
 }
 
 

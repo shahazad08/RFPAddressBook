@@ -81,6 +81,8 @@ public class AddressBookMain {
                 for (Contact person : personsInState) {
                     System.out.println(person);
                 }
+                long count = addressBook.countPersonsByState(state);
+                System.out.println("Total Persons in State '" + state + "': " + count);
             }
         }
 
@@ -100,6 +102,8 @@ public class AddressBookMain {
                 for (Contact person : personsInCity) {
                     System.out.println(person);
                 }
+                long count = addressBook.countPersonsByCity(city);
+                System.out.println("Total Persons in City '" + city + "': " + count);
             }
         }
     }
@@ -120,6 +124,7 @@ public class AddressBookMain {
                 for (Contact contact : searchResults) {
                     System.out.println(contact);
                 }
+
             }
         }
     }

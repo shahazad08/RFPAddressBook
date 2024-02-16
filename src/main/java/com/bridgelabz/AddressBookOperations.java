@@ -9,4 +9,7 @@ public interface AddressBookOperations {
     void editContact();
     void deleteContact();
     List<Contact> searchPersonByCityOrState(String cityOrState);
+    List<Contact> getContactsByState(String state);
+    List<Contact> getContactsByCity(String city);
+
 }
